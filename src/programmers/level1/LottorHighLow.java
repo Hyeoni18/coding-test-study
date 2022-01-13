@@ -27,7 +27,7 @@ public class LottorHighLow {
             }
         }
         //5.jackpot=2, zeroNum=2 값이 나온다.
-        answer = new int[]{getGrade(jackpot+zeroNum),getGrade(jackpot)}; //당첨순위를 조회한다.
+        answer = new int[]{getGrade(jackpot+zeroNum),getGrade(jackpot)}; //6.당첨순위를 조회한다.
         return answer;
     }
 
