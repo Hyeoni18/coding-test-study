@@ -7,14 +7,22 @@ import java.util.stream.Collectors;
 
 public class UnfinishedRunner {
     public static void main(String[] args) {
-        String[] participant = {"leo", "kiki", "eden"};
-        String[] completion = {"eden"};
+        String[] participant = {"mislav", "stanko", "mislav", "ana"};
+        String[] completion = {"stanko", "ana", "mislav"};
 
-        List<String> pList = Arrays.asList(participant);
-        for(String runner : completion) {
-            pList = pList.stream().filter( d -> !d.equals(runner)).collect(Collectors.toList());
+        for(int i=0; i<participant.length; i++) {
+            boolean flag = true;
+            for(int j=0; j<completion.length; j++) {
+                if(participant[i].equals(completion[j])) {
+                    participant[i]="0";
+                    completion[j]="0";
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag) {
+                System.out.println(participant[i]);
+            }
         }
-        System.out.println(pList.toString().getClass());
-
     }
 }
