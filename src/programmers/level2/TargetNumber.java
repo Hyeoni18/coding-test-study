@@ -7,36 +7,42 @@ import java.util.Stack;
 import java.util.stream.IntStream;
 
 public class TargetNumber {
+    static int answer;
+
     public static void main(String[] args) {
         int[] numbers = {1, 1, 1, 1, 1};
         int target = 3;
-    //    int sum = IntStream.of(numbers).sum();
+        // 1. answer은 전역변수로 선언.
+        answer = 0;
 
-        System.out.println(" result "+recursion(numbers, target, 0, numbers.length-2, numbers.length-1));
+        // 2. dfs수행.
+        dfs(numbers,target,0,0);
     }
-
-    static Integer recursion(int[] numbers, int target, int st, int ed, int cnt) {
-        Stack<Integer> stackList = new Stack<>();
-        int sum = 0;
-        int result = 0;
-
-        for(int i=0; i<ed; i++) {
-            sum+=(numbers[i]*-1);
-            stackList.add(numbers[i]*-1);
+    // 3. dfs(numbers, target, idx:몇 번째 인덱스인지, sum: idx까지 누적된 값).
+    static void dfs(int[] numbers,int target,int idx,int sum){
+        System.out.println("IDX : "+idx);
+        // 4. 모든 정수를 탐색했을 때,
+        if(idx == numbers.length){
+            System.out.println("여긴 언제와 ? "+idx+" , sum 은 ? "+sum);
+            // 5. 누적합이 target과 동일하면 answer++ 후 메소드 종료.
+            if(sum == target) answer++;
+            return;
         }
 
-        System.out.println(sum);
-        /*if(target==sum) {
-            result+=1;
-        }
-        if(st==ed-1) {
-            return result+recursion(numbers, target, st-1, ed);
-        }*/
-      /*  if(target==sum && st!=ed) {
-            return 1+recursion(numbers, target, st+1, ed);
-        } else if (target!=sum) {
-            return 0+recursion(numbers, target, st+1, ed);
-        }*/
-        return result;
+        // 6. 현재 인덱스의 정수를 +로 합해준다.
+        sum+=numbers[idx];
+        System.out.println("IDX : "+idx+" 의 sum : "+sum+" 넘버,,, : "+numbers[idx]);
+        // 7. 다음 인덱스 dfs 수행.
+        dfs(numbers,target,idx+1,sum);
+        // 8. 6.의 값을 다시 빼준 뒤,
+        sum-=numbers[idx];
+        System.out.println("IDX : "+idx+" 의 뺄셈을 한 sum : "+sum+" 넘버,,, : "+numbers[idx]);
+        // 9. 현재 인덱스의 정수를 -로 합해준다.
+        sum+=(-1 * numbers[idx]);
+        System.out.println("IDX : "+idx+" 의 9 번째 sum : "+sum+" 넘버,,, : "+numbers[idx]);
+        // 10. 다시 다음 인덱스 dfs 수행.
+        dfs(numbers,target,idx+1,sum);
+
     }
+
 }

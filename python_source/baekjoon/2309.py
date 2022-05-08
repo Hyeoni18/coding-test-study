@@ -1,5 +1,5 @@
 # <문제> 일곱 난쟁이
-
+# <반복>
 from collections import deque
 
 height = [int(input()) for _ in range(9)]
